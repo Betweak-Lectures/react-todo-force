@@ -5,23 +5,19 @@ import TodoList from "./TodoList";
 import TodoSearchInput from "./TodoSearchInput";
 
 import { TodoStore } from "../../lib/utils";
+import { v4 as uuidv4 } from "uuid";
 
 const colorSet = ["white", "red", "blue", "green", "yellow"];
 
 export default function TodoApp() {
-  const [todoList, setTodoList] = useState([
-    {
-      text: "sample1",
-      color: "red",
-    },
-  ]);
+  const [todoList, setTodoList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [filteredTodoList, setFilteredTodoList] = useState([]);
   const [activeColor, setActiveColor] = useState(colorSet[0]);
 
   const addTodo = useCallback(
     (text, color) => {
-      const todos = [...todoList, { text, color }];
+      const todos = [...todoList, { id: uuidv4(), text, color }];
       setTodoList(todos);
       TodoStore.setTodo(todos);
     },
@@ -40,6 +36,15 @@ export default function TodoApp() {
       setFilteredTodoList([...todoList]);
     }
   }, [searchInput, todoList]);
+
+  const removeTodo = useCallback(
+    (todoId) => {
+      const newTodoList = todoList.filter((todo, idx) => todoId !== todo.id);
+      setTodoList(newTodoList);
+      TodoStore.setTodo(newTodoList);
+    },
+    [todoList],
+  );
 
   return (
     <div
@@ -70,7 +75,7 @@ export default function TodoApp() {
       <div>
         <h4>Todo Items</h4>
         <div>
-          <TodoList todos={filteredTodoList} />
+          <TodoList todos={filteredTodoList} onRemove={removeTodo} />
         </div>
       </div>
     </div>
