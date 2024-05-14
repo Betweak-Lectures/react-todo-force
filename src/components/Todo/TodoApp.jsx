@@ -45,6 +45,22 @@ export default function TodoApp() {
     },
     [todoList],
   );
+  const editTodo = useCallback(
+    (todoId, text) => {
+      const newTodoList = todoList.map((todo) => {
+        if (todo.id === todoId) {
+          return {
+            ...todo,
+            text,
+          };
+        }
+        return todo;
+      });
+      setTodoList(newTodoList);
+      TodoStore.setTodo(newTodoList);
+    },
+    [todoList],
+  );
 
   return (
     <div
@@ -75,7 +91,11 @@ export default function TodoApp() {
       <div>
         <h4>Todo Items</h4>
         <div>
-          <TodoList todos={filteredTodoList} onRemove={removeTodo} />
+          <TodoList
+            todos={filteredTodoList}
+            onRemove={removeTodo}
+            onEdit={editTodo}
+          />
         </div>
       </div>
     </div>
