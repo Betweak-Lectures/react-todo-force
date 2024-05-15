@@ -15,13 +15,10 @@ export default function TodoListItem({ todo, onRemove, onEdit }) {
    *    3-1. 수정 버튼 클릭시(onclick) 실제 todoList변경.
    *    3-2. editMode를 false로 변경
    */
+
   // 1-1. editMode라는 boolean state를 하나 둔다.
   const [editMode, setEditMode] = useState(false);
-  const [inputText, setInputText] = useState("");
-
-  useEffect(() => {
-    setInputText(todo.text);
-  }, [todo]);
+  const [inputText, setInputText] = useState(todo.text);
 
   return (
     <li

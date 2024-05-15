@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { todoContext } from "./TodoProvider";
 
-export default function TodoInput({ color, addTodo }) {
+export default function TodoInput({ color }) {
   const [inputText, setInputText] = useState("");
+
+  const { addTodo } = useContext(todoContext);
+
   return (
     <div>
       <input
