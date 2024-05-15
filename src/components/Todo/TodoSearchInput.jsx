@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { todoContext } from "./TodoProvider";
+import { todoContext, useTodo } from "./TodoProvider";
 
 export default function TodoSearchInput() {
-  const { setSearchInput } = useContext(todoContext);
+  const { setSearchInput } = useTodo();
   return (
     <div>
       <label htmlFor="search">검색</label>

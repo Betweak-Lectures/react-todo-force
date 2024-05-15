@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import TodoListItem from "./TodoListItem";
-import { todoContext } from "./TodoProvider";
+import { todoContext, useTodo } from "./TodoProvider";
 
 export default function TodoList() {
   // const onRemove={removeTodo} onEdit={editTodo}
-  const { removeTodo: onRemove, editTodo: onEdit, filteredTodoList: todos } = useContext(todoContext);
+  const { removeTodo: onRemove, editTodo: onEdit, filteredTodoList: todos } = useTodo();
 
   return (
     <ul style={{ listStyle: "none", padding: 0 }}>

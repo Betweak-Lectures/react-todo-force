@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TodoStore } from "../../lib/utils";
 
@@ -61,4 +61,8 @@ export default function TodoProvider({ children }) {
       {children}
     </todoContext.Provider>
   );
+}
+
+export function useTodo() {
+  return useContext(todoContext);
 }
